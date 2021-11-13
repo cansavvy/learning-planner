@@ -2,4 +2,6 @@
 
 export(launchApp)
 import(shiny)
+import(shinysurveys)
 importFrom(graphics,hist)
+importFrom(shinysurveys,surveyOutput)

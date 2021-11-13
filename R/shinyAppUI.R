@@ -2,23 +2,21 @@
 #'
 #' @importFrom graphics hist
 #' @import shiny
+#' @importFrom shinysurveys surveyOutput
 
 # Define UI for slider demo app ----
-shinyAppUI <- fluidPage(
+shinyAppUI <- function() {
+  df <- data.frame(question = "What is your favorite food?",
+                   option = "Your Answer",
+                   input_type = "text",
+                   input_id = "favorite_food",
+                   dependence = NA,
+                   dependence_value = NA,
+                   required = F)
   
-  # App title ----
-  titlePanel("Likert"),
-  
-    # Main panel for displaying outputs ----
-    mainPanel(radioButtons("notebook", "RMarkdown/Juptyer:",
-                           c('Completely Unfamiliar' = "1",
-                             "Somewhat Familiar" = "2",
-                             "Familiar" = "3",
-                             "Very Familiar" = "4",
-                             "Completely Familiar" = "5"), inline = TRUE),
-      width = 12,
-      
-      # Output: Table summarizing the values entered ----
-      tableOutput("values")
-    )
+  fluidPage(
+  surveyOutput(df = df,
+               survey_title = "Hello, World!",
+               survey_description = "Welcome! This is a demo survey showing off the {shinysurveys} package.")
 )
+}

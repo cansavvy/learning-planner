@@ -3,22 +3,15 @@
 #' @param input provided by shiny
 #' @param output provided by shiny
 #'
+#' @import shinysurveys
 
-shinyAppServer <- function(input, output) {
+shinyAppServer <- function(input, output, session) {
+  renderSurvey()
   
-  # Reactive expression to create data frame of all input values ----
-  sliderValues <- reactive({
-    
-    data.frame(
-      Name = c("RMarkdown/Juptyer"),
-      Value = as.character(c(input$notebooks)),
-      stringsAsFactors = FALSE)
-    
+  observeEvent(input$submit, {
+    showModal(modalDialog(
+      title = "Congrats, you completed your first shinysurvey!",
+      "You can customize what actions happen when a user finishes a survey using input$submit."
+    ))
   })
-  
-  # Show the values in an HTML table ----
-  output$values <- renderTable({
-    sliderValues()
-  })
-  
 }
